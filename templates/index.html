@@ -1,11 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>{{ title }}</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile.name }} - {{ profile.title }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Merhaba 👋</h1>
-    <p>FastAPI arayüzü çalışıyor.</p>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <header class="bg-slate-900 text-white py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-5xl font-bold mb-4">{{ profile.name }}</h1>
+            <p class="text-xl text-gray-300 mb-8">{{ profile.title }}</p>
+            <div class="flex justify-center space-x-4">
+                <a href="{{ profile.contact.github }}" target="_blank" class="text-2xl hover:text-blue-400"><i class="fab fa-github"></i></a>
+                <a href="{{ profile.contact.linkedin }}" target="_blank" class="text-2xl hover:text-blue-400"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:{{ profile.contact.email }}" class="text-2xl hover:text-blue-400"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="md:col-span-2">
+            <h2 class="text-3xl font-bold mb-4 border-b-2 border-slate-900 pb-2">About Me</h2>
+            <p class="text-lg leading-relaxed text-gray-700">{{ profile.summary }}</p>
+        </div>
+        <div class="bg-white p-6 rounded shadow-md">
+            <h3 class="text-xl font-bold mb-4">Tech Stack</h3>
+            <div class="mb-4">
+                <span class="font-bold block text-sm text-gray-500 uppercase">Languages</span>
+                <div class="flex flex-wrap gap-2 mt-2">
+                    {% for lang in profile.skills.languages %}
+                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ lang }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <div>
+                <span class="font-bold block text-sm text-gray-500 uppercase">Frameworks</span>
+                <div class="flex flex-wrap gap-2 mt-2">
+                    {% for fw in profile.skills.frameworks %}
+                    <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ fw }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="bg-white py-12">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-8 text-center">Experience</h2>
+            <div class="space-y-8 max-w-4xl mx-auto">
+                {% for job in profile.experience %}
+                <div class="border-l-4 border-slate-900 pl-6 relative">
+                    <div class="absolute -left-2.5 top-0 w-5 h-5 bg-slate-900 rounded-full"></div>
+                    <h3 class="text-2xl font-bold text-gray-900">{{ job.role }}</h3>
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="text-lg font-semibold text-blue-600">{{ job.company }}</h4>
+                        <span class="text-sm text-gray-500 italic">{{ job.date }}</span>
+                    </div>
+                    <p class="text-gray-700">{{ job.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-8 text-center">Featured Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                {% for project in profile.projects %}
+                <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 p-6">
+                    <h3 class="text-xl font-bold mb-2">{{ project.name }}</h3>
+                    <p class="text-sm text-blue-500 mb-4">{{ project.tech }}</p>
+                    <p class="text-gray-600 mb-6">{{ project.desc }}</p>
+                    <a href="{{ project.url }}" class="inline-block bg-slate-900 text-white py-2 px-4 rounded hover:bg-slate-700 transition">View Project</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-white py-6 text-center mt-12">
+        <p>&copy; 2025 {{ profile.name }}. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>
