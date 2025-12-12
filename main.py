@@ -9,7 +9,8 @@ templates = Jinja2Templates(directory="templates")
 
 @app.get("/")
 def home(request: Request):
-    return templates.TemplateResponse(
-        "index.html",
-        {"request": request, "title": "VPS Demo"}
-    )
+    return templates.TemplateResponse("index.html", {"request": request})
+
+@app.post("/")
+def root_post():
+    return {"ok": True}
