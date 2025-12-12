@@ -1,14 +1,15 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from fastapi import FastAPI, Request
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
-class RequestBody(BaseModel):
-    name: str
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
 
-class ResponseBody(BaseModel):
-    message: str
-
-@app.post("/")
-async def root(item: RequestBody):
-    return ResponseBody(message=f"Hello {item.name}")
+@app.get("/")
+def home(request: Request):
+    return templates.TemplateResponse(
+        "index.html",
+        {"request": request, "title": "VPS Demo"}
+    )
