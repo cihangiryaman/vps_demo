@@ -9,55 +9,113 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
-# CV'den alınan veriler [cite: 1, 2, 8, 16, 21, 24, 37, 41]
+# CV'den alınan veriler
 profile_data = {
     "name": "Cihangir Yaman",
     "title": "Student - Backend Developer",
-    "summary": "Dedicated software developer since 2018. Primary focus on .NET, also developing with Python and Java.",
+    "tagline": "Building robust backend solutions since 2018",
+    "summary": "Dedicated software developer since 2018 with a primary focus on .NET development. Experienced in building scalable backend systems, SaaS applications, and API development. Also proficient in Python and Java. Passionate about clean architecture, software design patterns, and leading development teams.",
     "contact": {
         "email": "cihangiryaman3200@gmail.com",
         "github": "https://github.com/cihangiryaman",
         "linkedin": "https://www.linkedin.com/in/cihangir-yaman",
-        "location": "Istanbul, Turkiye"
+        "location": "Istanbul, Turkiye",
+        "phone": "+90 (552) 123 4567"
+    },
+    "education": {
+        "degree": "Bachelor's Degree in Computer Engineering",
+        "university": "Marmara University",
+        "date": "2023 - Present",
+        "gpa": "3.67/4.00"
     },
     "skills": {
-        "languages": ["C#", "Python", "Java", "JavaScript", "C"],
-        "frameworks": ["ASP.NET", "Entity Framework", "FastAPI", "AutoMapper", "FluentValidation"],
-        "tools": ["Git", "GitHub", "MSSQL", "Redis", "Docker"]
+        "languages": ["C#", "Python", "Java", "JavaScript", "C", "SQL"],
+        "frameworks": ["ASP.NET Core", "Entity Framework", "FastAPI", "AutoMapper", "FluentValidation", "MediatR"],
+        "tools": ["Git", "GitHub", "MSSQL", "Redis", "Docker", "Visual Studio", "Rider"],
+        "concepts": ["Clean Architecture", "CQRS", "Repository Pattern", "Multi-Tenant SaaS", "RESTful APIs", "Microservices"]
     },
     "experience": [
         {
             "company": "NöroNest",
             "role": "Backend Team Lead (Volunteer)",
             "date": "August 2025 - Present",
-            "description": "Developing ASP.NET APIs for a therapeutic game designed for Alzheimer's patients. Managing MSSQL database and backend operations."
+            "location": "Remote",
+            "description": "Leading the backend development team for a therapeutic game designed for Alzheimer's patients. Developing ASP.NET Core APIs and managing MSSQL database operations.",
+            "highlights": [
+                "Leading a team of backend developers",
+                "Architecting scalable API solutions",
+                "Managing database design and optimization",
+                "Implementing secure authentication systems"
+            ]
         },
         {
             "company": "MADES (Marmara Developer Society)",
-            "role": "Founder",
+            "role": "Founder & President",
             "date": "October 2025 - Present",
-            "description": "Founded a student club to organize conferences and trainings in software and game development."
+            "location": "Istanbul, Turkiye",
+            "description": "Founded and leading a student club focused on organizing conferences, workshops, and training sessions in software and game development.",
+            "highlights": [
+                "Established club from ground up",
+                "Organizing technical workshops and seminars",
+                "Building a community of developers",
+                "Coordinating with industry professionals"
+            ]
         },
         {
             "company": "apartmanyonetimsistemi.com",
-            "role": "Developer",
+            "role": "Full Stack Developer",
             "date": "July 2025 - December 2025",
-            "description": "Built a multi-tenant SaaS architecture using clean architecture principles with ASP.NET and MSSQL."
+            "location": "Remote",
+            "description": "Developed a comprehensive multi-tenant SaaS apartment management system using clean architecture principles with ASP.NET Core and MSSQL.",
+            "highlights": [
+                "Implemented multi-tenant SaaS architecture",
+                "Applied clean architecture and CQRS patterns",
+                "Developed RESTful APIs with ASP.NET Core",
+                "Managed database design and migrations"
+            ]
         }
     ],
     "projects": [
         {
             "name": "Private Lesson Tracking System",
             "url": "https://www.ozelderstakipsistemi.com",
-            "tech": "ASP.NET, MSSQL, Entity Framework",
-            "desc": "A multi-tenant SaaS application enabling private tutors to track students, lessons, and payments."
+            "tech": ["ASP.NET Core", "MSSQL", "Entity Framework", "Clean Architecture"],
+            "desc": "A comprehensive multi-tenant SaaS application enabling private tutors to efficiently track students, schedule lessons, manage payments, and generate reports. Features include automated notifications, calendar integration, and financial analytics.",
+            "featured": True,
+            "github": None
         },
         {
             "name": "3D Gear CAD Generator",
-            "url": "#",
-            "tech": "Python, FastAPI, Redis, Three.js",
-            "desc": "Generates 3D gears via gear parameters using FreeCAD API and visualizes them on the web."
+            "url": None,
+            "tech": ["Python", "FastAPI", "Redis", "Three.js", "FreeCAD API"],
+            "desc": "An innovative web application that generates 3D gear models based on user-defined parameters using the FreeCAD API. Features real-time 3D visualization in the browser using Three.js and caching with Redis for improved performance.",
+            "featured": True,
+            "github": None
+        },
+        {
+            "name": "Apartment Management System",
+            "url": None,
+            "tech": ["ASP.NET Core", "MSSQL", "Clean Architecture", "CQRS"],
+            "desc": "Multi-tenant SaaS platform for apartment management with features including expense tracking, payment collection, announcement systems, and resident communication tools.",
+            "featured": False,
+            "github": None
         }
+    ],
+    "certifications": [
+        {
+            "name": "Software Testing with Copilot",
+            "issuer": "LinkedIn Learning",
+            "date": "November 2024"
+        },
+        {
+            "name": "Advanced C# Fundamentals",
+            "issuer": "BTK Academy",
+            "date": "November 2023"
+        }
+    ],
+    "languages": [
+        {"name": "Turkish", "level": "Native"},
+        {"name": "English", "level": "Professional Working Proficiency"}
     ]
 }
 

@@ -6,85 +6,358 @@
     <title>{{ profile.name }} - {{ profile.title }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f172a',
+                        secondary: '#1e293b',
+                        accent: '#3b82f6',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans">
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
 
-    <header class="bg-slate-900 text-white py-20">
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-primary">{{ profile.name }}</a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#about" class="text-gray-700 hover:text-accent transition">About</a>
+                <a href="#experience" class="text-gray-700 hover:text-accent transition">Experience</a>
+                <a href="#projects" class="text-gray-700 hover:text-accent transition">Projects</a>
+                <a href="#skills" class="text-gray-700 hover:text-accent transition">Skills</a>
+                <a href="#contact" class="text-gray-700 hover:text-accent transition">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-gradient-to-br from-primary via-secondary to-slate-800 text-white pt-32 pb-20 mt-16">
         <div class="container mx-auto px-6 text-center">
-            <h1 class="text-5xl font-bold mb-4">{{ profile.name }}</h1>
-            <p class="text-xl text-gray-300 mb-8">{{ profile.title }}</p>
-            <div class="flex justify-center space-x-4">
-                <a href="{{ profile.contact.github }}" target="_blank" class="text-2xl hover:text-blue-400"><i class="fab fa-github"></i></a>
-                <a href="{{ profile.contact.linkedin }}" target="_blank" class="text-2xl hover:text-blue-400"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:{{ profile.contact.email }}" class="text-2xl hover:text-blue-400"><i class="fas fa-envelope"></i></a>
+            <div class="animate-fade-in">
+                <h1 class="text-6xl font-bold mb-4 tracking-tight">{{ profile.name }}</h1>
+                <p class="text-2xl text-blue-300 mb-2">{{ profile.title }}</p>
+                <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">{{ profile.tagline }}</p>
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="{{ profile.contact.github }}" target="_blank" class="text-3xl hover:text-accent transition transform hover:scale-110">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="{{ profile.contact.linkedin }}" target="_blank" class="text-3xl hover:text-accent transition transform hover:scale-110">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="mailto:{{ profile.contact.email }}" class="text-3xl hover:text-accent transition transform hover:scale-110">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="#contact" class="text-3xl hover:text-accent transition transform hover:scale-110">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </a>
+                </div>
+                <div class="flex justify-center space-x-4">
+                    <a href="#projects" class="bg-accent hover:bg-blue-600 text-white font-semibold px-8 py-3 rounded-lg transition transform hover:scale-105">
+                        View My Work
+                    </a>
+                    <a href="#contact" class="bg-transparent border-2 border-white hover:bg-white hover:text-primary text-white font-semibold px-8 py-3 rounded-lg transition">
+                        Get In Touch
+                    </a>
+                </div>
             </div>
         </div>
     </header>
 
-    <div class="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="md:col-span-2">
-            <h2 class="text-3xl font-bold mb-4 border-b-2 border-slate-900 pb-2">About Me</h2>
-            <p class="text-lg leading-relaxed text-gray-700">{{ profile.summary }}</p>
-        </div>
-        <div class="bg-white p-6 rounded shadow-md">
-            <h3 class="text-xl font-bold mb-4">Tech Stack</h3>
-            <div class="mb-4">
-                <span class="font-bold block text-sm text-gray-500 uppercase">Languages</span>
-                <div class="flex flex-wrap gap-2 mt-2">
-                    {% for lang in profile.skills.languages %}
-                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ lang }}</span>
-                    {% endfor %}
-                </div>
-            </div>
-            <div>
-                <span class="font-bold block text-sm text-gray-500 uppercase">Frameworks</span>
-                <div class="flex flex-wrap gap-2 mt-2">
-                    {% for fw in profile.skills.frameworks %}
-                    <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ fw }}</span>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <section class="bg-white py-12">
+    <!-- About Section -->
+    <section id="about" class="py-20">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-8 text-center">Experience</h2>
-            <div class="space-y-8 max-w-4xl mx-auto">
-                {% for job in profile.experience %}
-                <div class="border-l-4 border-slate-900 pl-6 relative">
-                    <div class="absolute -left-2.5 top-0 w-5 h-5 bg-slate-900 rounded-full"></div>
-                    <h3 class="text-2xl font-bold text-gray-900">{{ job.role }}</h3>
-                    <div class="flex justify-between items-center mb-2">
-                        <h4 class="text-lg font-semibold text-blue-600">{{ job.company }}</h4>
-                        <span class="text-sm text-gray-500 italic">{{ job.date }}</span>
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-4xl font-bold mb-12 text-center text-primary">About Me</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2">
+                        <div class="bg-white p-8 rounded-xl shadow-lg">
+                            <p class="text-lg leading-relaxed text-gray-700 mb-6">{{ profile.summary }}</p>
+                            
+                            <div class="border-t pt-6">
+                                <h3 class="text-2xl font-bold mb-4 text-primary">Education</h3>
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-accent/10 p-3 rounded-lg">
+                                        <i class="fas fa-graduation-cap text-2xl text-accent"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-semibold text-gray-900">{{ profile.education.degree }}</h4>
+                                        <p class="text-lg text-accent font-medium">{{ profile.education.university }}</p>
+                                        <p class="text-gray-600">{{ profile.education.date }}</p>
+                                        <p class="text-gray-700 font-semibold mt-1">GPA: {{ profile.education.gpa }}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border-t pt-6 mt-6">
+                                <h3 class="text-2xl font-bold mb-4 text-primary">Languages</h3>
+                                <div class="flex flex-wrap gap-4">
+                                    {% for lang in profile.languages %}
+                                    <div class="bg-gray-50 px-4 py-2 rounded-lg border-l-4 border-accent">
+                                        <span class="font-semibold text-gray-900">{{ lang.name }}</span>
+                                        <span class="text-sm text-gray-600 block">{{ lang.level }}</span>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <p class="text-gray-700">{{ job.description }}</p>
+                    
+                    <div class="space-y-6">
+                        <!-- Quick Info Card -->
+                        <div class="bg-white p-6 rounded-xl shadow-lg">
+                            <h3 class="text-xl font-bold mb-4 text-primary flex items-center">
+                                <i class="fas fa-info-circle mr-2 text-accent"></i>
+                                Quick Info
+                            </h3>
+                            <div class="space-y-3 text-gray-700">
+                                <div class="flex items-center">
+                                    <i class="fas fa-map-marker-alt w-6 text-accent"></i>
+                                    <span>{{ profile.contact.location }}</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-envelope w-6 text-accent"></i>
+                                    <a href="mailto:{{ profile.contact.email }}" class="hover:text-accent">Email Me</a>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fab fa-github w-6 text-accent"></i>
+                                    <a href="{{ profile.contact.github }}" target="_blank" class="hover:text-accent">GitHub</a>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fab fa-linkedin w-6 text-accent"></i>
+                                    <a href="{{ profile.contact.linkedin }}" target="_blank" class="hover:text-accent">LinkedIn</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Certifications Card -->
+                        <div class="bg-white p-6 rounded-xl shadow-lg">
+                            <h3 class="text-xl font-bold mb-4 text-primary flex items-center">
+                                <i class="fas fa-certificate mr-2 text-accent"></i>
+                                Certifications
+                            </h3>
+                            <div class="space-y-4">
+                                {% for cert in profile.certifications %}
+                                <div class="border-l-4 border-accent pl-4">
+                                    <h4 class="font-semibold text-gray-900">{{ cert.name }}</h4>
+                                    <p class="text-sm text-gray-600">{{ cert.issuer }}</p>
+                                    <p class="text-xs text-gray-500">{{ cert.date }}</p>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                {% endfor %}
             </div>
         </div>
     </section>
 
-    <section class="py-12 bg-gray-50">
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-white">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-8 text-center">Featured Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                {% for project in profile.projects %}
-                <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 p-6">
-                    <h3 class="text-xl font-bold mb-2">{{ project.name }}</h3>
-                    <p class="text-sm text-blue-500 mb-4">{{ project.tech }}</p>
-                    <p class="text-gray-600 mb-6">{{ project.desc }}</p>
-                    <a href="{{ project.url }}" class="inline-block bg-slate-900 text-white py-2 px-4 rounded hover:bg-slate-700 transition">View Project</a>
+            <h2 class="text-4xl font-bold mb-12 text-center text-primary">Technical Skills</h2>
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gradient-to-br from-blue-50 to-white p-8 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-code text-3xl text-accent mr-4"></i>
+                        <h3 class="text-2xl font-bold text-primary">Languages</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        {% for lang in profile.skills.languages %}
+                        <span class="bg-accent text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md transform hover:scale-105 transition">{{ lang }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-green-50 to-white p-8 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-layer-group text-3xl text-green-600 mr-4"></i>
+                        <h3 class="text-2xl font-bold text-primary">Frameworks</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        {% for fw in profile.skills.frameworks %}
+                        <span class="bg-green-600 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md transform hover:scale-105 transition">{{ fw }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-purple-50 to-white p-8 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-tools text-3xl text-purple-600 mr-4"></i>
+                        <h3 class="text-2xl font-bold text-primary">Tools & Technologies</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        {% for tool in profile.skills.tools %}
+                        <span class="bg-purple-600 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md transform hover:scale-105 transition">{{ tool }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-orange-50 to-white p-8 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-brain text-3xl text-orange-600 mr-4"></i>
+                        <h3 class="text-2xl font-bold text-primary">Concepts & Patterns</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        {% for concept in profile.skills.concepts %}
+                        <span class="bg-orange-600 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md transform hover:scale-105 transition">{{ concept }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold mb-12 text-center text-primary">Professional Experience</h2>
+            <div class="max-w-5xl mx-auto space-y-8">
+                {% for job in profile.experience %}
+                <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-2xl transition transform hover:-translate-y-1">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-primary mb-2">{{ job.role }}</h3>
+                            <h4 class="text-xl font-semibold text-accent mb-1">{{ job.company }}</h4>
+                            <p class="text-gray-600 flex items-center">
+                                <i class="fas fa-map-marker-alt mr-2"></i>{{ job.location }}
+                            </p>
+                        </div>
+                        <div class="mt-2 md:mt-0">
+                            <span class="inline-block bg-accent/10 text-accent font-semibold px-4 py-2 rounded-full text-sm">
+                                <i class="fas fa-calendar-alt mr-1"></i>{{ job.date }}
+                            </span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4 leading-relaxed">{{ job.description }}</p>
+                    <div class="border-t pt-4">
+                        <h4 class="font-semibold text-gray-900 mb-2">Key Highlights:</h4>
+                        <ul class="space-y-2">
+                            {% for highlight in job.highlights %}
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                                <span class="text-gray-700">{{ highlight }}</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
                 {% endfor %}
             </div>
         </div>
     </section>
 
-    <footer class="bg-slate-900 text-white py-6 text-center mt-12">
-        <p>&copy; 2025 {{ profile.name }}. All rights reserved.</p>
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold mb-4 text-center text-primary">Featured Projects</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+                A selection of projects showcasing my expertise in backend development, SaaS architecture, and API design
+            </p>
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for project in profile.projects %}
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition transform hover:-translate-y-2 border-t-4 border-accent">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-primary">{{ project.name }}</h3>
+                        <p class="text-gray-700 mb-4 leading-relaxed">{{ project.desc }}</p>
+                        <div class="mb-4">
+                            <h4 class="text-sm font-semibold text-gray-600 mb-2 uppercase">Tech Stack:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                {% for tech in project.tech %}
+                                <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full border border-gray-300">{{ tech }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="flex space-x-3 mt-6">
+                            {% if project.url %}
+                            <a href="{{ project.url }}" target="_blank" class="flex-1 bg-accent hover:bg-blue-600 text-white text-center py-2 px-4 rounded-lg transition font-semibold">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </a>
+                            {% endif %}
+                            {% if project.github %}
+                            <a href="{{ project.github }}" target="_blank" class="flex-1 bg-gray-800 hover:bg-gray-900 text-white text-center py-2 px-4 rounded-lg transition font-semibold">
+                                <i class="fab fa-github mr-2"></i>Code
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-br from-primary via-secondary to-slate-800 text-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl font-bold mb-6">Let's Work Together</h2>
+                <p class="text-xl text-gray-300 mb-12">
+                    I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    <a href="mailto:{{ profile.contact.email }}" class="bg-white/10 hover:bg-white/20 backdrop-blur p-6 rounded-xl transition transform hover:scale-105">
+                        <i class="fas fa-envelope text-4xl mb-4 text-accent"></i>
+                        <h3 class="font-semibold text-lg mb-2">Email</h3>
+                        <p class="text-gray-300 text-sm">{{ profile.contact.email }}</p>
+                    </a>
+                    <a href="{{ profile.contact.linkedin }}" target="_blank" class="bg-white/10 hover:bg-white/20 backdrop-blur p-6 rounded-xl transition transform hover:scale-105">
+                        <i class="fab fa-linkedin text-4xl mb-4 text-accent"></i>
+                        <h3 class="font-semibold text-lg mb-2">LinkedIn</h3>
+                        <p class="text-gray-300 text-sm">Connect with me</p>
+                    </a>
+                    <a href="{{ profile.contact.github }}" target="_blank" class="bg-white/10 hover:bg-white/20 backdrop-blur p-6 rounded-xl transition transform hover:scale-105">
+                        <i class="fab fa-github text-4xl mb-4 text-accent"></i>
+                        <h3 class="font-semibold text-lg mb-2">GitHub</h3>
+                        <p class="text-gray-300 text-sm">Check out my code</p>
+                    </a>
+                </div>
+                <a href="mailto:{{ profile.contact.email }}" class="inline-block bg-accent hover:bg-blue-600 text-white font-semibold px-10 py-4 rounded-lg transition transform hover:scale-105 text-lg">
+                    <i class="fas fa-paper-plane mr-2"></i>Send Me a Message
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-8 text-center">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="{{ profile.contact.github }}" target="_blank" class="hover:text-accent transition">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="{{ profile.contact.linkedin }}" target="_blank" class="hover:text-accent transition">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+                <a href="mailto:{{ profile.contact.email }}" class="hover:text-accent transition">
+                    <i class="fas fa-envelope text-2xl"></i>
+                </a>
+            </div>
+            <p class="text-sm">&copy; 2025 {{ profile.name }}. All rights reserved.</p>
+            <p class="text-xs mt-2">Built with FastAPI & Tailwind CSS</p>
+        </div>
     </footer>
 
+    <!-- Smooth Scrolling Script -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
