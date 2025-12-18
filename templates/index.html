@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,12 +12,11 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
             color: #E5E5E5;
             background: #0B090A;
             min-height: 100vh;
-            padding: 3rem 0;
             position: relative;
             overflow-x: hidden;
         }
@@ -38,9 +37,9 @@
             position: absolute;
             top: -100%;
             font-family: 'Courier New', monospace;
-            font-size: 20px;
+            font-size: 18px;
             color: #8338EC;
-            opacity: 0.3;
+            opacity: 0.15;
             animation: fall linear infinite;
             text-shadow: 0 0 5px #8338EC;
         }
@@ -54,245 +53,271 @@
         main {
             position: relative;
             z-index: 1;
-        }
-
-        .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 4rem 2rem;
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, rgba(131, 56, 236, 0.1) 0%, rgba(255, 0, 110, 0.05) 100%);
-            padding: 4rem 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(131, 56, 236, 0.3);
-            text-align: center;
+            margin-bottom: 6rem;
+            border-bottom: 2px solid rgba(131, 56, 236, 0.3);
+            padding-bottom: 3rem;
             animation: fadeInUp 0.8s ease;
-            margin-bottom: 3rem;
-            border: 2px solid #8338EC;
-            backdrop-filter: blur(10px);
         }
 
         .hero h1 {
-            font-size: 3rem;
-            color: #E5E5E5;
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #8338EC 0%, #FF006E 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 0.5rem;
-            font-weight: 700;
-            text-shadow: 0 0 20px rgba(131, 56, 236, 0.5);
+            letter-spacing: -0.02em;
         }
 
         .hero .title {
-            font-size: 1.3rem;
-            color: #FF006E;
+            font-size: 1.5rem;
+            color: #FFBE0B;
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
         }
 
         .hero .bio {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: #E5E5E5;
-            max-width: 800px;
-            margin: 0 auto 2rem;
             line-height: 1.8;
-            opacity: 0.9;
+            margin-bottom: 2rem;
+            opacity: 0.85;
         }
 
         .contact-info {
             display: flex;
-            justify-content: center;
             gap: 2rem;
             flex-wrap: wrap;
-            margin-top: 1.5rem;
+            font-size: 1rem;
         }
 
         .contact-info a {
-            color: #FFBE0B;
+            color: #8338EC;
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .contact-info a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #FF006E;
+            transition: width 0.3s ease;
+        }
+
+        .contact-info a:hover::after {
+            width: 100%;
         }
 
         .contact-info a:hover {
             color: #FF006E;
-            text-shadow: 0 0 10px rgba(255, 0, 110, 0.5);
         }
 
-        /* Section Titles */
-        .section-title {
-            font-size: 2rem;
-            color: #E5E5E5;
-            margin-bottom: 2rem;
-            text-align: center;
-            font-weight: 700;
-            text-shadow: 0 0 20px rgba(131, 56, 236, 0.3);
+        .contact-info .separator {
+            color: rgba(229, 229, 229, 0.3);
         }
 
-        /* Work Experience Section */
-        .experience-section, .projects-section {
-            background: linear-gradient(135deg, rgba(131, 56, 236, 0.08) 0%, rgba(11, 9, 10, 0.9) 100%);
-            padding: 3rem 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(131, 56, 236, 0.2);
-            margin-bottom: 3rem;
-            border: 2px solid #8338EC;
+        /* Section */
+        section {
+            margin-bottom: 5rem;
             animation: fadeInUp 0.8s ease;
-            backdrop-filter: blur(10px);
         }
 
-        .experience-grid, .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .experience-card, .project-card {
-            background: linear-gradient(135deg, #8338EC 0%, #6420C7 100%);
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(131, 56, 236, 0.4);
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #E5E5E5;
+            margin-bottom: 3rem;
             position: relative;
-            overflow: hidden;
+            display: inline-block;
         }
 
-        .experience-card::before, .project-card::before {
+        .section-title::after {
             content: '';
             position: absolute;
-            top: 0;
+            bottom: -8px;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255, 0, 110, 0.1) 0%, rgba(255, 190, 11, 0.1) 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 0;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, #8338EC 0%, #FF006E 100%);
         }
 
-        .experience-card:hover::before, .project-card:hover::before {
-            opacity: 1;
-        }
-
-        .experience-card:hover, .project-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 12px 30px rgba(255, 0, 110, 0.4);
-            border-color: #FF006E;
-        }
-
-        .experience-card > *, .project-card > * {
+        /* Experience Items */
+        .experience-item {
+            margin-bottom: 3rem;
+            padding-left: 2rem;
+            border-left: 3px solid rgba(131, 56, 236, 0.3);
+            transition: all 0.3s ease;
             position: relative;
-            z-index: 1;
         }
 
-        .experience-card h3, .project-card h3 {
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -7.5px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: #8338EC;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(131, 56, 236, 0.6);
+        }
+
+        .experience-item:hover {
+            border-left-color: #FF006E;
+            padding-left: 2.5rem;
+        }
+
+        .experience-item:hover::before {
+            background: #FF006E;
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.6);
+            transform: scale(1.3);
+        }
+
+        .experience-item h3 {
+            font-size: 1.6rem;
             color: #E5E5E5;
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
             font-weight: 600;
+            margin-bottom: 0.5rem;
         }
 
-        .experience-card .role, .project-card .tech {
+        .experience-item .role {
+            font-size: 1.1rem;
             color: #FFBE0B;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
         }
 
-        .experience-card .period {
+        .experience-item .period {
+            font-size: 0.95rem;
+            color: rgba(229, 229, 229, 0.6);
+            font-weight: 400;
+        }
+
+        /* Project Items */
+        .project-item {
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(131, 56, 236, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .project-item:last-child {
+            border-bottom: none;
+        }
+
+        .project-item:hover {
+            transform: translateX(10px);
+        }
+
+        .project-item h3 {
+            font-size: 1.6rem;
             color: #E5E5E5;
-            font-size: 0.9rem;
-            opacity: 0.8;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-item .tech {
+            font-size: 1rem;
+            color: #FFBE0B;
             font-weight: 500;
             margin-bottom: 1rem;
+            font-family: 'Courier New', monospace;
         }
 
-        .project-card p {
-            color: #E5E5E5;
-            line-height: 1.8;
-            margin-top: 1rem;
-            opacity: 0.95;
+        .project-item p {
+            font-size: 1.05rem;
+            color: rgba(229, 229, 229, 0.8);
+            line-height: 1.7;
         }
 
         /* Social Links */
         .social-links {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
-        .link-button {
-            background: linear-gradient(135deg, #8338EC 0%, #6420C7 100%);
-            color: #E5E5E5;
-            text-decoration: none;
-            padding: 1.5rem 2rem;
-            border-radius: 16px;
+        .link-item {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            font-weight: 600;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 15px rgba(131, 56, 236, 0.4);
+            gap: 1.5rem;
+            padding: 1.5rem 2rem;
+            background: rgba(131, 56, 236, 0.05);
+            border-left: 4px solid #8338EC;
             transition: all 0.3s ease;
-            border: 2px solid transparent;
+            text-decoration: none;
+            color: #E5E5E5;
             position: relative;
             overflow: hidden;
-            z-index: 1;
         }
 
-        .link-button::before {
+        .link-item::before {
             content: '';
             position: absolute;
-            top: 0;
             left: 0;
+            top: 0;
             width: 0;
             height: 100%;
-            background: linear-gradient(135deg, #FF006E 0%, #FFBE0B 100%);
+            background: linear-gradient(90deg, rgba(131, 56, 236, 0.15) 0%, rgba(255, 0, 110, 0.15) 100%);
             transition: width 0.4s ease;
-            z-index: -1;
+            z-index: 0;
         }
 
-        .link-button:hover::before {
+        .link-item:hover::before {
             width: 100%;
         }
 
-        .link-button:hover {
-            color: #0B090A;
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(255, 0, 110, 0.5);
-            border-color: #FF006E;
+        .link-item:hover {
+            border-left-color: #FF006E;
+            padding-left: 2.5rem;
+            background: rgba(131, 56, 236, 0.08);
         }
 
-        .link-button .icon {
-            width: 28px;
-            height: 28px;
-            fill: currentColor;
-            transition: transform 0.3s ease;
+        .link-item .icon {
+            width: 32px;
+            height: 32px;
+            fill: #8338EC;
+            transition: all 0.3s ease;
             flex-shrink: 0;
+            position: relative;
+            z-index: 1;
         }
 
-        .link-button:hover .icon {
-            transform: scale(1.1) rotate(5deg);
+        .link-item:hover .icon {
+            fill: #FF006E;
+            transform: scale(1.1);
+        }
+
+        .link-item span {
+            font-size: 1.15rem;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
         }
 
         /* Footer */
         footer {
-            background: linear-gradient(135deg, rgba(131, 56, 236, 0.08) 0%, rgba(11, 9, 10, 0.9) 100%);
-            color: #E5E5E5;
             text-align: center;
-            padding: 2rem 0;
-            margin-top: 4rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(131, 56, 236, 0.2);
-            border: 2px solid #FFBE0B;
-            backdrop-filter: blur(10px);
-        }
-
-        footer p {
-            font-weight: 500;
+            padding: 3rem 0;
+            margin-top: 6rem;
+            border-top: 2px solid rgba(131, 56, 236, 0.3);
+            color: rgba(229, 229, 229, 0.6);
+            font-size: 0.95rem;
         }
 
         /* Animations */
@@ -307,33 +332,32 @@
             }
         }
 
-        /* Selection Color */
+        /* Selection */
         ::selection {
             background: #FF006E;
             color: #E5E5E5;
         }
 
-        ::-moz-selection {
-            background: #FF006E;
-            color: #E5E5E5;
-        }
-
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 768px) {
+            main {
+                padding: 2rem 1.5rem;
+            }
+
+            .hero {
+                margin-bottom: 4rem;
+            }
+
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
 
             .hero .title {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
 
             .hero .bio {
                 font-size: 1rem;
-            }
-
-            .hero {
-                padding: 3rem 1.5rem;
             }
 
             .contact-info {
@@ -341,32 +365,26 @@
                 gap: 0.5rem;
             }
 
-            .experience-grid, .projects-grid, .social-links {
-                grid-template-columns: 1fr;
-            }
-
-            .link-button {
-                padding: 1.2rem 1.5rem;
-                font-size: 1rem;
-            }
-
             .section-title {
-                font-size: 1.5rem;
+                font-size: 2rem;
+            }
+
+            .experience-item h3,
+            .project-item h3 {
+                font-size: 1.3rem;
+            }
+
+            .experience-item {
+                padding-left: 1.5rem;
+            }
+
+            .link-item {
+                padding: 1.2rem 1.5rem;
             }
         }
 
-        /* Smooth Scrolling */
         html {
             scroll-behavior: smooth;
-        }
-
-        /* Glow Effects */
-        .hero:hover {
-            box-shadow: 0 10px 50px rgba(131, 56, 236, 0.5);
-        }
-
-        .experience-section:hover, .projects-section:hover {
-            box-shadow: 0 10px 50px rgba(131, 56, 236, 0.3);
         }
     </style>
 </head>
@@ -375,160 +393,148 @@
 <div class="matrix-bg" id="matrixBg"></div>
 
 <main>
-    <div class="container">
-        <!-- Hero Section -->
-        <section class="hero">
-            <h1>Cihangir YAMAN</h1>
-            <p class="title">Student - Backend Developer</p>
-            <p class="bio">
-                Dedicated software developer since 2018. In addition to .NET as my primary focus, I also develop projects regularly using Python and Java. I actively use Git, GitHub, and GitHub Copilot. Currently studying Computer Engineering at Marmara University.
-            </p>
-            <div class="contact-info">
-                <a href="mailto:cihangiryaman3200@gmail.com">cihangiryaman3200@gmail.com</a>
-                <span style="color: #E5E5E5;">|</span>
-                <a href="tel:+905435836673">+90 543 583 66 73</a>
-            </div>
-        </section>
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1>Cihangir YAMAN</h1>
+        <p class="title">Student — Backend Developer</p>
+        <p class="bio">
+            Dedicated software developer since 2018. In addition to .NET as my primary focus, I also develop projects regularly using Python and Java. I actively use Git, GitHub, and GitHub Copilot. Currently studying Computer Engineering at Marmara University.
+        </p>
+        <div class="contact-info">
+            <a href="mailto:cihangiryaman3200@gmail.com">cihangiryaman3200@gmail.com</a>
+            <span class="separator">•</span>
+            <a href="tel:+905435836673">+90 543 583 66 73</a>
+        </div>
+    </header>
 
-        <!-- Work Experience Section -->
-        <section class="experience-section">
-            <h2 class="section-title">Work Experience</h2>
-            <div class="experience-grid">
-                <div class="experience-card">
-                    <h3>NöroNest</h3>
-                    <p class="role">Backend Team Lead (Volunteer)</p>
-                    <p class="period">August 2025 – Present</p>
-                </div>
-                <div class="experience-card">
-                    <h3>apartmanyonetimsistemi.com</h3>
-                    <p class="role">Developer</p>
-                    <p class="period">July 2025 – December 2025</p>
-                </div>
-                <div class="experience-card">
-                    <h3>MADES (Marmara Developer Society)</h3>
-                    <p class="role">Founder</p>
-                    <p class="period">October 2025 – Present</p>
-                </div>
-            </div>
-        </section>
+    <!-- Work Experience -->
+    <section>
+        <h2 class="section-title">Work Experience<h2>
+        <div class="experience-item">
+            <h3>NöroNest</h3>
+            <p class="role">Backend Team Lead (Volunteer)</p>
+            <p class="period">August 2025 — Present</p>
+        </div>
+        <div class="experience-item">
+            <h3>apartmanyonetimsistemi.com</h3>
+            <p class="role">Developer</p>
+            <p class="period">July 2025 — December 2025</p>
+        </div>
+        <div class="experience-item">
+            <h3>MADES (Marmara Developer Society)</h3>
+            <p class="role">Founder</p>
+            <p class="period">October 2025 — Present</p>
+        </div>
+    </section>
 
-        <!-- Featured Projects Section -->
-        <section class="projects-section">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3>Private Lesson Tracking System</h3>
-                    <p class="tech">ASP.NET • MSSQL • Entity Framework</p>
-                    <p>A multi-tenant SaaS application built with clean architecture, enabling private tutors to track their students, lessons, and payments.</p>
-                </div>
-                <div class="project-card">
-                    <h3>3D Gear CAD Generator</h3>
-                    <p class="tech">Python • FastAPI • Three.js • Redis</p>
-                    <p>An application that allows mechanical engineers to generate 3D gears by entering parameters and export them in .step or .stl formats.</p>
-                </div>
-            </div>
-        </section>
+    <!-- Featured Projects -->
+    <section>
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="project-item">
+            <h3>Private Lesson Tracking System</h3>
+            <p class="tech">ASP.NET • MSSQL • Entity Framework</p>
+            <p>A multi-tenant SaaS application built with clean architecture, enabling private tutors to track their students, lessons, and payments.</p>
+        </div>
+        <div class="project-item">
+            <h3>3D Gear CAD Generator</h3>
+            <p class="tech">Python • FastAPI • Three.js • Redis</p>
+            <p>An application that allows mechanical engineers to generate 3D gears by entering parameters and export them in .step or .stl formats.</p>
+        </div>
+    </section>
 
-        <!-- Social Links Section -->
-        <section class="experience-section">
-            <h2 class="section-title">Connect With Me</h2>
-            <div class="social-links">
-                <a href="https://github.com/cihangiryaman" class="link-button" target="_blank" rel="noopener">
-                    <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                    GitHub
-                </a>
+    <!-- Social Links -->
+    <section>
+        <h2 class="section-title">Connect With Me</h2>
+        <div class="social-links">
+            <a href="https://github.com/cihangiryaman" class="link-item" target="_blank" rel="noopener">
+                <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                <span>GitHub</span>
+            </a>
 
-                <a href="https://linkedin.com/in/cihangir-yaman" class="link-button" target="_blank" rel="noopener">
-                    <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                    </svg>
-                    LinkedIn
-                </a>
+            <a href="https://linkedin.com/in/cihangir-yaman" class="link-item" target="_blank" rel="noopener">
+                <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+                <span>LinkedIn</span>
+            </a>
 
-                <a href="https://stackoverflow.com/users/16539029/cihangir-yaman" class="link-button" target="_blank" rel="noopener">
-                    <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15.725 0l-1.72 1.277 6.39 8.588 1.716-1.277L15.725 0zm-3.94 3.418l-1.369 1.644 8.225 6.85 1.369-1.644-8.225-6.85zm-3.15 4.465l-.905 1.94 9.702 4.517.904-1.94-9.701-4.517zm-1.85 4.86l-.44 2.093 10.473 2.201.44-2.093-10.473-2.201zM1.89 15.47V24h19.19v-8.53h-2.133v6.397H4.021v-6.396H1.89zm4.265 2.133v2.13h10.66v-2.13H6.154Z"/>
-                    </svg>
-                    Stack Overflow
-                </a>
+            <a href="https://stackoverflow.com/users/16539029/cihangir-yaman" class="link-item" target="_blank" rel="noopener">
+                <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.725 0l-1.72 1.277 6.39 8.588 1.716-1.277L15.725 0zm-3.94 3.418l-1.369 1.644 8.225 6.85 1.369-1.644-8.225-6.85zm-3.15 4.465l-.905 1.94 9.702 4.517.904-1.94-9.701-4.517zm-1.85 4.86l-.44 2.093 10.473 2.201.44-2.093-10.473-2.201zM1.89 15.47V24h19.19v-8.53h-2.133v6.397H4.021v-6.396H1.89zm4.265 2.133v2.13h10.66v-2.13H6.154Z"/>
+                </svg>
+                <span>Stack Overflow</span>
+            </a>
 
-                <a href="https://www.ozelderstakipsistemi.com" class="link-button" target="_blank" rel="noopener">
-                    <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.514 0 10 4.486 10 10s-4.486 10-10 10S2 17.514 2 12 6.486 2 12 2zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12zm0 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>
-                    </svg>
-                    Private Lesson System
-                </a>
+            <a href="https://www.ozelderstakipsistemi.com" class="link-item" target="_blank" rel="noopener">
+                <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.514 0 10 4.486 10 10s-4.486 10-10 10S2 17.514 2 12 6.486 2 12 2zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12zm0 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>
+                </svg>
+                <span>Private Lesson System</span>
+            </a>
 
-                <a href="https://cihangiryaman.blogspot.com/" class="link-button" target="_blank" rel="noopener">
-                    <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M21.976 24H2.026C.9 24 0 23.1 0 21.976V2.026C0 .9.9 0 2.025 0H22.05C23.1 0 24 .9 24 2.025v19.95C24 23.1 23.1 24 21.976 24zM12 3.975H9c-2.775 0-5.025 2.25-5.025 5.025v6c0 2.774 2.25 5.024 5.025 5.024h6c2.774 0 5.024-2.25 5.024-5.024v-3c0-2.775-2.25-5.025-5.024-5.025H12zm3 9c0 .825-.675 1.5-1.5 1.5h-3c-.825 0-1.5-.675-1.5-1.5s.675-1.5 1.5-1.5h3c.825 0 1.5.675 1.5 1.5zm-1.5-3.975h-3c-.825 0-1.5-.675-1.5-1.5s.675-1.5 1.5-1.5h3c.825 0 1.5.675 1.5 1.5s-.675 1.5-1.5 1.5z"/>
-                    </svg>
-                    Blog
-                </a>
+            <a href="https://cihangiryaman.blogspot.com/" class="link-item" target="_blank" rel="noopener">
+                <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21.976 24H2.026C.9 24 0 23.1 0 21.976V2.026C0 .9.9 0 2.025 0H22.05C23.1 0 24 .9 24 2.025v19.95C24 23.1 23.1 24 21.976 24zM12 3.975H9c-2.775 0-5.025 2.25-5.025 5.025v6c0 2.774 2.25 5.024 5.025 5.024h6c2.774 0 5.024-2.25 5.024-5.024v-3c0-2.775-2.25-5.025-5.024-5.025H12zm3 9c0 .825-.675 1.5-1.5 1.5h-3c-.825 0-1.5-.675-1.5-1.5s.675-1.5 1.5-1.5h3c.825 0 1.5.675 1.5 1.5zm-1.5-3.975h-3c-.825 0-1.5-.675-1.5-1.5s.675-1.5 1.5-1.5h3c.825 0 1.5.675 1.5 1.5s-.675 1.5-1.5 1.5z"/>
+                </svg>
+                <span>Blog</span>
+            </a>
 
-                <a href="https://www.youtube.com/@cihangiryaman9354" class="link-button" target="_blank" rel="noopener">
-                    <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                    </svg>
-                    YouTube
-                </a>
-            </div>
-        </section>
-    </div>
+            <a href="https://www.youtube.com/@cihangiryaman9354" class="link-item" target="_blank" rel="noopener">
+                <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                <span>YouTube</span>
+            </a>
+        </div>
+    </section>
 </main>
 
 <footer>
-    <div class="container">
-        <p>&copy; 2025 Cihangir YAMAN. All rights reserved.</p>
-    </div>
+    <p>© 2025 Cihangir YAMAN. All rights reserved.</p>
 </footer>
 
 <script>
     function createMatrixRain() {
-    const matrixBg = document.getElementById('matrixBg');
-    const columns = Math.floor(window.innerWidth / 30);
-
-    for (let i = 0; i < columns; i++) {
-        const column = document.createElement('div');
-        column.className = 'matrix-column';
-        column.style.left = `${i * 30}px`;
-
-        // Random duration between 10-25 seconds
-        const duration = Math.random() * 15 + 10;
-        column.style.animationDuration = `${duration}s`;
-
-        // Random delay to stagger the start
-        const delay = Math.random() * 4;
-        column.style.animationDelay = `${delay}s`;
-
-        // Create a string of random 1s and 0s
-        let binaryString = '';
-        const length = Math.floor(Math.random() * 15) + 10;
-        for (let j = 0; j < length; j++) {
-            binaryString += Math.random() > 0.5 ? '1' : '0';
-            if (j < length - 1) binaryString += '<br>';
-        }
-        column.innerHTML = binaryString;
-
-        matrixBg.appendChild(column);
-    }
-}
-
-// Initialize matrix rain
-createMatrixRain();
-
-// Recreate on window resize
-let resizeTimeout;
-window.addEventListener('resize', () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
         const matrixBg = document.getElementById('matrixBg');
-        matrixBg.innerHTML = '';
-        createMatrixRain();
-    }, 250);
-});
+        const columns = Math.floor(window.innerWidth / 30);
+
+        for (let i = 0; i < columns; i++) {
+            const column = document.createElement('div');
+            column.className = 'matrix-column';
+            column.style.left = `${i * 30}px`;
+
+            // Random duration between 10-25 seconds
+            const duration = Math.random() * 15 + 10;
+            column.style.animationDuration = `${duration}s`;
+
+            // Create a string of random 1s and 0s
+            let binaryString = '';
+            const length = Math.floor(Math.random() * 15) + 10;
+            for (let j = 0; j < length; j++) {
+                binaryString += Math.random() > 0.5 ? '1' : '0';
+                if (j < length - 1) binaryString += '<br>';
+            }
+            column.innerHTML = binaryString;
+
+            matrixBg.appendChild(column);
+        }
+    }
+
+    // Initialize matrix rain
+    createMatrixRain();
+
+    // Recreate on window resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            const matrixBg = document.getElementById('matrixBg');
+            matrixBg.innerHTML = '';
+            createMatrixRain();
+        }, 250);
+    });
 </script>
 
 </body>
