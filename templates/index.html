@@ -3,361 +3,533 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ profile.name }} - {{ profile.title }}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="/static/css/style.css" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#0f172a',
-                        secondary: '#1e293b',
-                        accent: '#3b82f6',
-                    }
-                }
+    <title>Cihangir YAMAN - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #E5E5E5;
+            background: #0B090A;
+            min-height: 100vh;
+            padding: 3rem 0;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Matrix Rain Effect */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .matrix-column {
+            position: absolute;
+            top: -100%;
+            font-family: 'Courier New', monospace;
+            font-size: 20px;
+            color: #8338EC;
+            opacity: 0.3;
+            animation: fall linear infinite;
+            text-shadow: 0 0 5px #8338EC;
+        }
+
+        @keyframes fall {
+            to {
+                top: 100%;
             }
         }
-    </script>
+
+        main {
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(131, 56, 236, 0.1) 0%, rgba(255, 0, 110, 0.05) 100%);
+            padding: 4rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(131, 56, 236, 0.3);
+            text-align: center;
+            animation: fadeInUp 0.8s ease;
+            margin-bottom: 3rem;
+            border: 2px solid #8338EC;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: #E5E5E5;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(131, 56, 236, 0.5);
+        }
+
+        .hero .title {
+            font-size: 1.3rem;
+            color: #FF006E;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero .bio {
+            font-size: 1.1rem;
+            color: #E5E5E5;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .contact-info a {
+            color: #FFBE0B;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #FF006E;
+            text-shadow: 0 0 10px rgba(255, 0, 110, 0.5);
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 2rem;
+            color: #E5E5E5;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(131, 56, 236, 0.3);
+        }
+
+        /* Work Experience Section */
+        .experience-section, .projects-section {
+            background: linear-gradient(135deg, rgba(131, 56, 236, 0.08) 0%, rgba(11, 9, 10, 0.9) 100%);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(131, 56, 236, 0.2);
+            margin-bottom: 3rem;
+            border: 2px solid #8338EC;
+            animation: fadeInUp 0.8s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .experience-grid, .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .experience-card, .project-card {
+            background: linear-gradient(135deg, #8338EC 0%, #6420C7 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(131, 56, 236, 0.4);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-card::before, .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.1) 0%, rgba(255, 190, 11, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .experience-card:hover::before, .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .experience-card:hover, .project-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(255, 0, 110, 0.4);
+            border-color: #FF006E;
+        }
+
+        .experience-card > *, .project-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .experience-card h3, .project-card h3 {
+            color: #E5E5E5;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .experience-card .role, .project-card .tech {
+            color: #FFBE0B;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .experience-card .period {
+            color: #E5E5E5;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            color: #E5E5E5;
+            line-height: 1.8;
+            margin-top: 1rem;
+            opacity: 0.95;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .link-button {
+            background: linear-gradient(135deg, #8338EC 0%, #6420C7 100%);
+            color: #E5E5E5;
+            text-decoration: none;
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(131, 56, 236, 0.4);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .link-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(135deg, #FF006E 0%, #FFBE0B 100%);
+            transition: width 0.4s ease;
+            z-index: -1;
+        }
+
+        .link-button:hover::before {
+            width: 100%;
+        }
+
+        .link-button:hover {
+            color: #0B090A;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 0, 110, 0.5);
+            border-color: #FF006E;
+        }
+
+        .link-button .icon {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .link-button:hover .icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, rgba(131, 56, 236, 0.08) 0%, rgba(11, 9, 10, 0.9) 100%);
+            color: #E5E5E5;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(131, 56, 236, 0.2);
+            border: 2px solid #FFBE0B;
+            backdrop-filter: blur(10px);
+        }
+
+        footer p {
+            font-weight: 500;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Selection Color */
+        ::selection {
+            background: #FF006E;
+            color: #E5E5E5;
+        }
+
+        ::-moz-selection {
+            background: #FF006E;
+            color: #E5E5E5;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .title {
+                font-size: 1.1rem;
+            }
+
+            .hero .bio {
+                font-size: 1rem;
+            }
+
+            .hero {
+                padding: 3rem 1.5rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .experience-grid, .projects-grid, .social-links {
+                grid-template-columns: 1fr;
+            }
+
+            .link-button {
+                padding: 1.2rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Glow Effects */
+        .hero:hover {
+            box-shadow: 0 10px 50px rgba(131, 56, 236, 0.5);
+        }
+
+        .experience-section:hover, .projects-section:hover {
+            box-shadow: 0 10px 50px rgba(131, 56, 236, 0.3);
+        }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+<body>
+<!-- Matrix Rain Background -->
+<div class="matrix-bg" id="matrixBg"></div>
 
-    <!-- Navigation Bar -->
-    <nav class="bg-white shadow-md fixed w-full top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-primary">{{ profile.name }}</a>
-            <div class="hidden md:flex space-x-6">
-                <a href="#about" class="text-gray-700 hover:text-accent transition">About</a>
-                <a href="#skills" class="text-gray-700 hover:text-accent transition">Skills</a>
-                <a href="#experience" class="text-gray-700 hover:text-accent transition">Experience</a>
-                <a href="#projects" class="text-gray-700 hover:text-accent transition">Projects</a>
-                <a href="#contact" class="text-gray-700 hover:text-accent transition">Contact</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="bg-gradient-to-br from-primary via-secondary to-slate-800 text-white pt-32 pb-20 mt-16">
-        <div class="container mx-auto px-6 text-center">
-            <div class="animate-fade-in">
-                <h1 class="text-6xl font-bold mb-4 tracking-tight">{{ profile.name }}</h1>
-                <p class="text-2xl text-blue-300 mb-2">{{ profile.title }}</p>
-                <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">{{ profile.tagline }}</p>
-                <div class="flex justify-center space-x-6 mb-8">
-                    <a href="{{ profile.contact.github }}" target="_blank" class="text-3xl hover:text-accent transition transform hover:scale-110">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="{{ profile.contact.linkedin }}" target="_blank" class="text-3xl hover:text-accent transition transform hover:scale-110">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="mailto:{{ profile.contact.email }}" class="text-3xl hover:text-accent transition transform hover:scale-110">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                    <a href="#contact" class="text-3xl hover:text-accent transition transform hover:scale-110">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </a>
-                </div>
-                <div class="flex justify-center space-x-4">
-                    <a href="#projects" class="bg-accent hover:bg-blue-600 text-white font-semibold px-8 py-3 rounded-lg transition transform hover:scale-105">
-                        View My Work
-                    </a>
-                    <a href="#contact" class="bg-transparent border-2 border-white hover:bg-white hover:text-primary text-white font-semibold px-8 py-3 rounded-lg transition">
-                        Get In Touch
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- About Section -->
-    <section id="about" class="py-20">
-        <div class="container mx-auto px-6">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-4xl font-bold mb-12 text-center text-primary">About Me</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="md:col-span-2">
-                        <div class="bg-white p-8 rounded-xl shadow-lg">
-                            <p class="text-lg leading-relaxed text-gray-700 mb-6">{{ profile.summary }}</p>
-                            
-                            <div class="border-t pt-6">
-                                <h3 class="text-2xl font-bold mb-4 text-primary">Education</h3>
-                                <div class="flex items-start space-x-4">
-                                    <div class="bg-accent/10 p-3 rounded-lg">
-                                        <i class="fas fa-graduation-cap text-2xl text-accent"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="text-xl font-semibold text-gray-900">{{ profile.education.degree }}</h4>
-                                        <p class="text-lg text-accent font-medium">{{ profile.education.university }}</p>
-                                        <p class="text-gray-600">{{ profile.education.date }}</p>
-                                        <p class="text-gray-700 font-semibold mt-1">GPA: {{ profile.education.gpa }}</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="border-t pt-6 mt-6">
-                                <h3 class="text-2xl font-bold mb-4 text-primary">Languages</h3>
-                                <div class="flex flex-wrap gap-4">
-                                    {% for lang in profile.languages %}
-                                    <div class="bg-gray-50 px-4 py-2 rounded-lg border-l-4 border-accent">
-                                        <span class="font-semibold text-gray-900">{{ lang.name }}</span>
-                                        <span class="text-sm text-gray-600 block">{{ lang.level }}</span>
-                                    </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="space-y-6">
-                        <!-- Quick Info Card -->
-                        <div class="bg-white p-6 rounded-xl shadow-lg">
-                            <h3 class="text-xl font-bold mb-4 text-primary flex items-center">
-                                <i class="fas fa-info-circle mr-2 text-accent"></i>
-                                Quick Info
-                            </h3>
-                            <div class="space-y-3 text-gray-700">
-                                <div class="flex items-center">
-                                    <i class="fas fa-map-marker-alt w-6 text-accent"></i>
-                                    <span>{{ profile.contact.location }}</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-envelope w-6 text-accent"></i>
-                                    <a href="mailto:{{ profile.contact.email }}" class="hover:text-accent">Email Me</a>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fab fa-github w-6 text-accent"></i>
-                                    <a href="{{ profile.contact.github }}" target="_blank" class="hover:text-accent">GitHub</a>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fab fa-linkedin w-6 text-accent"></i>
-                                    <a href="{{ profile.contact.linkedin }}" target="_blank" class="hover:text-accent">LinkedIn</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Certifications Card -->
-                        <div class="bg-white p-6 rounded-xl shadow-lg">
-                            <h3 class="text-xl font-bold mb-4 text-primary flex items-center">
-                                <i class="fas fa-certificate mr-2 text-accent"></i>
-                                Certifications
-                            </h3>
-                            <div class="space-y-4">
-                                {% for cert in profile.certifications %}
-                                <div class="border-l-4 border-accent pl-4">
-                                    <h4 class="font-semibold text-gray-900">{{ cert.name }}</h4>
-                                    <p class="text-sm text-gray-600">{{ cert.issuer }}</p>
-                                    <p class="text-xs text-gray-500">{{ cert.date }}</p>
-                                </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold mb-12 text-center text-primary">Technical Skills</h2>
-            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-gradient-to-br from-blue-50 to-white p-8 rounded-xl shadow-lg">
-                    <div class="flex items-center mb-6">
-                        <i class="fas fa-code text-3xl text-accent mr-4"></i>
-                        <h3 class="text-2xl font-bold text-primary">Languages</h3>
-                    </div>
-                    <div class="flex flex-wrap gap-3">
-                        {% for lang in profile.skills.languages %}
-                        <span class="bg-accent text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md transform hover:scale-105 transition">{{ lang }}</span>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <div class="bg-gradient-to-br from-green-50 to-white p-8 rounded-xl shadow-lg">
-                    <div class="flex items-center mb-6">
-                        <i class="fas fa-layer-group text-3xl text-green-600 mr-4"></i>
-                        <h3 class="text-2xl font-bold text-primary">Frameworks</h3>
-                    </div>
-                    <div class="flex flex-wrap gap-3">
-                        {% for fw in profile.skills.frameworks %}
-                        <span class="bg-green-600 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md transform hover:scale-105 transition">{{ fw }}</span>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <div class="bg-gradient-to-br from-purple-50 to-white p-8 rounded-xl shadow-lg">
-                    <div class="flex items-center mb-6">
-                        <i class="fas fa-tools text-3xl text-purple-600 mr-4"></i>
-                        <h3 class="text-2xl font-bold text-primary">Tools & Technologies</h3>
-                    </div>
-                    <div class="flex flex-wrap gap-3">
-                        {% for tool in profile.skills.tools %}
-                        <span class="bg-purple-600 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md transform hover:scale-105 transition">{{ tool }}</span>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <div class="bg-gradient-to-br from-orange-50 to-white p-8 rounded-xl shadow-lg">
-                    <div class="flex items-center mb-6">
-                        <i class="fas fa-brain text-3xl text-orange-600 mr-4"></i>
-                        <h3 class="text-2xl font-bold text-primary">Concepts & Patterns</h3>
-                    </div>
-                    <div class="flex flex-wrap gap-3">
-                        {% for concept in profile.skills.concepts %}
-                        <span class="bg-orange-600 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md transform hover:scale-105 transition">{{ concept }}</span>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold mb-12 text-center text-primary">Professional Experience</h2>
-            <div class="max-w-5xl mx-auto space-y-8">
-                {% for job in profile.experience %}
-                <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-2xl transition transform hover:-translate-y-1">
-                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
-                        <div>
-                            <h3 class="text-2xl font-bold text-primary mb-2">{{ job.role }}</h3>
-                            <h4 class="text-xl font-semibold text-accent mb-1">{{ job.company }}</h4>
-                            <p class="text-gray-600 flex items-center">
-                                <i class="fas fa-map-marker-alt mr-2"></i>{{ job.location }}
-                            </p>
-                        </div>
-                        <div class="mt-2 md:mt-0">
-                            <span class="inline-block bg-accent/10 text-accent font-semibold px-4 py-2 rounded-full text-sm">
-                                <i class="fas fa-calendar-alt mr-1"></i>{{ job.date }}
-                            </span>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 mb-4 leading-relaxed">{{ job.description }}</p>
-                    <div class="border-t pt-4">
-                        <h4 class="font-semibold text-gray-900 mb-2">Key Highlights:</h4>
-                        <ul class="space-y-2">
-                            {% for highlight in job.highlights %}
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
-                                <span class="text-gray-700">{{ highlight }}</span>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold mb-4 text-center text-primary">Featured Projects</h2>
-            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-                A selection of projects showcasing my expertise in backend development, SaaS architecture, and API design
+<main>
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Cihangir YAMAN</h1>
+            <p class="title">Student - Backend Developer</p>
+            <p class="bio">
+                Dedicated software developer since 2018. In addition to .NET as my primary focus, I also develop projects regularly using Python and Java. I actively use Git, GitHub, and GitHub Copilot. Currently studying Computer Engineering at Marmara University.
             </p>
-            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {% for project in profile.projects %}
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition transform hover:-translate-y-2 border-t-4 border-accent">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-3 text-primary">{{ project.name }}</h3>
-                        <p class="text-gray-700 mb-4 leading-relaxed">{{ project.desc }}</p>
-                        <div class="mb-4">
-                            <h4 class="text-sm font-semibold text-gray-600 mb-2 uppercase">Tech Stack:</h4>
-                            <div class="flex flex-wrap gap-2">
-                                {% for tech in project.tech %}
-                                <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full border border-gray-300">{{ tech }}</span>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <div class="flex space-x-3 mt-6">
-                            {% if project.url %}
-                            <a href="{{ project.url }}" target="_blank" class="flex-1 bg-accent hover:bg-blue-600 text-white text-center py-2 px-4 rounded-lg transition font-semibold">
-                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
-                            </a>
-                            {% endif %}
-                            {% if project.github %}
-                            <a href="{{ project.github }}" target="_blank" class="flex-1 bg-gray-800 hover:bg-gray-900 text-white text-center py-2 px-4 rounded-lg transition font-semibold">
-                                <i class="fab fa-github mr-2"></i>Code
-                            </a>
-                            {% endif %}
-                        </div>
-                    </div>
+            <div class="contact-info">
+                <a href="mailto:cihangiryaman3200@gmail.com">cihangiryaman3200@gmail.com</a>
+                <span style="color: #E5E5E5;">|</span>
+                <a href="tel:+905435836673">+90 543 583 66 73</a>
+            </div>
+        </section>
+
+        <!-- Work Experience Section -->
+        <section class="experience-section">
+            <h2 class="section-title">Work Experience</h2>
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <h3>NöroNest</h3>
+                    <p class="role">Backend Team Lead (Volunteer)</p>
+                    <p class="period">August 2025 – Present</p>
                 </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gradient-to-br from-primary via-secondary to-slate-800 text-white">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-4xl font-bold mb-6">Let's Work Together</h2>
-                <p class="text-xl text-gray-300 mb-12">
-                    I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
-                </p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                    <a href="mailto:{{ profile.contact.email }}" class="bg-white/10 hover:bg-white/20 backdrop-blur p-6 rounded-xl transition transform hover:scale-105">
-                        <i class="fas fa-envelope text-4xl mb-4 text-accent"></i>
-                        <h3 class="font-semibold text-lg mb-2">Email</h3>
-                        <p class="text-gray-300 text-sm">{{ profile.contact.email }}</p>
-                    </a>
-                    <a href="{{ profile.contact.linkedin }}" target="_blank" class="bg-white/10 hover:bg-white/20 backdrop-blur p-6 rounded-xl transition transform hover:scale-105">
-                        <i class="fab fa-linkedin text-4xl mb-4 text-accent"></i>
-                        <h3 class="font-semibold text-lg mb-2">LinkedIn</h3>
-                        <p class="text-gray-300 text-sm">Connect with me</p>
-                    </a>
-                    <a href="{{ profile.contact.github }}" target="_blank" class="bg-white/10 hover:bg-white/20 backdrop-blur p-6 rounded-xl transition transform hover:scale-105">
-                        <i class="fab fa-github text-4xl mb-4 text-accent"></i>
-                        <h3 class="font-semibold text-lg mb-2">GitHub</h3>
-                        <p class="text-gray-300 text-sm">Check out my code</p>
-                    </a>
+                <div class="experience-card">
+                    <h3>apartmanyonetimsistemi.com</h3>
+                    <p class="role">Developer</p>
+                    <p class="period">July 2025 – December 2025</p>
                 </div>
-                <a href="mailto:{{ profile.contact.email }}" class="inline-block bg-accent hover:bg-blue-600 text-white font-semibold px-10 py-4 rounded-lg transition transform hover:scale-105 text-lg">
-                    <i class="fas fa-paper-plane mr-2"></i>Send Me a Message
+                <div class="experience-card">
+                    <h3>MADES (Marmara Developer Society)</h3>
+                    <p class="role">Founder</p>
+                    <p class="period">October 2025 – Present</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Projects Section -->
+        <section class="projects-section">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Private Lesson Tracking System</h3>
+                    <p class="tech">ASP.NET • MSSQL • Entity Framework</p>
+                    <p>A multi-tenant SaaS application built with clean architecture, enabling private tutors to track their students, lessons, and payments.</p>
+                </div>
+                <div class="project-card">
+                    <h3>3D Gear CAD Generator</h3>
+                    <p class="tech">Python • FastAPI • Three.js • Redis</p>
+                    <p>An application that allows mechanical engineers to generate 3D gears by entering parameters and export them in .step or .stl formats.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Links Section -->
+        <section class="experience-section">
+            <h2 class="section-title">Connect With Me</h2>
+            <div class="social-links">
+                <a href="https://github.com/cihangiryaman" class="link-button" target="_blank" rel="noopener">
+                    <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                </a>
+
+                <a href="https://linkedin.com/in/cihangir-yaman" class="link-button" target="_blank" rel="noopener">
+                    <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                    LinkedIn
+                </a>
+
+                <a href="https://stackoverflow.com/users/16539029/cihangir-yaman" class="link-button" target="_blank" rel="noopener">
+                    <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.725 0l-1.72 1.277 6.39 8.588 1.716-1.277L15.725 0zm-3.94 3.418l-1.369 1.644 8.225 6.85 1.369-1.644-8.225-6.85zm-3.15 4.465l-.905 1.94 9.702 4.517.904-1.94-9.701-4.517zm-1.85 4.86l-.44 2.093 10.473 2.201.44-2.093-10.473-2.201zM1.89 15.47V24h19.19v-8.53h-2.133v6.397H4.021v-6.396H1.89zm4.265 2.133v2.13h10.66v-2.13H6.154Z"/>
+                    </svg>
+                    Stack Overflow
+                </a>
+
+                <a href="https://www.ozelderstakipsistemi.com" class="link-button" target="_blank" rel="noopener">
+                    <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.514 0 10 4.486 10 10s-4.486 10-10 10S2 17.514 2 12 6.486 2 12 2zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12zm0 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>
+                    </svg>
+                    Private Lesson System
+                </a>
+
+                <a href="https://cihangiryaman.blogspot.com/" class="link-button" target="_blank" rel="noopener">
+                    <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21.976 24H2.026C.9 24 0 23.1 0 21.976V2.026C0 .9.9 0 2.025 0H22.05C23.1 0 24 .9 24 2.025v19.95C24 23.1 23.1 24 21.976 24zM12 3.975H9c-2.775 0-5.025 2.25-5.025 5.025v6c0 2.774 2.25 5.024 5.025 5.024h6c2.774 0 5.024-2.25 5.024-5.024v-3c0-2.775-2.25-5.025-5.024-5.025H12zm3 9c0 .825-.675 1.5-1.5 1.5h-3c-.825 0-1.5-.675-1.5-1.5s.675-1.5 1.5-1.5h3c.825 0 1.5.675 1.5 1.5zm-1.5-3.975h-3c-.825 0-1.5-.675-1.5-1.5s.675-1.5 1.5-1.5h3c.825 0 1.5.675 1.5 1.5s-.675 1.5-1.5 1.5z"/>
+                    </svg>
+                    Blog
+                </a>
+
+                <a href="https://www.youtube.com/@cihangiryaman9354" class="link-button" target="_blank" rel="noopener">
+                    <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                    YouTube
                 </a>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
+</main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-400 py-8 text-center">
-        <div class="container mx-auto px-6">
-            <div class="flex justify-center space-x-6 mb-4">
-                <a href="{{ profile.contact.github }}" target="_blank" class="hover:text-accent transition">
-                    <i class="fab fa-github text-2xl"></i>
-                </a>
-                <a href="{{ profile.contact.linkedin }}" target="_blank" class="hover:text-accent transition">
-                    <i class="fab fa-linkedin text-2xl"></i>
-                </a>
-                <a href="mailto:{{ profile.contact.email }}" class="hover:text-accent transition">
-                    <i class="fas fa-envelope text-2xl"></i>
-                </a>
-            </div>
-            <p class="text-sm">&copy; 2025 {{ profile.name }}. All rights reserved.</p>
-            <p class="text-xs mt-2">Built with FastAPI & Tailwind CSS</p>
-        </div>
-    </footer>
+<footer>
+    <div class="container">
+        <p>&copy; 2025 Cihangir YAMAN. All rights reserved.</p>
+    </div>
+</footer>
 
-    <!-- Smooth Scrolling Script -->
-    <script>
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
+<script>
+    function createMatrixRain() {
+    const matrixBg = document.getElementById('matrixBg');
+    const columns = Math.floor(window.innerWidth / 30);
+
+    for (let i = 0; i < columns; i++) {
+        const column = document.createElement('div');
+        column.className = 'matrix-column';
+        column.style.left = `${i * 30}px`;
+
+        // Random duration between 10-25 seconds
+        const duration = Math.random() * 15 + 10;
+        column.style.animationDuration = `${duration}s`;
+
+        // Random delay to stagger the start
+        const delay = Math.random() * 4;
+        column.style.animationDelay = `${delay}s`;
+
+        // Create a string of random 1s and 0s
+        let binaryString = '';
+        const length = Math.floor(Math.random() * 15) + 10;
+        for (let j = 0; j < length; j++) {
+            binaryString += Math.random() > 0.5 ? '1' : '0';
+            if (j < length - 1) binaryString += '<br>';
+        }
+        column.innerHTML = binaryString;
+
+        matrixBg.appendChild(column);
+    }
+}
+
+// Initialize matrix rain
+createMatrixRain();
+
+// Recreate on window resize
+let resizeTimeout;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        const matrixBg = document.getElementById('matrixBg');
+        matrixBg.innerHTML = '';
+        createMatrixRain();
+    }, 250);
+});
+</script>
+
 </body>
 </html>
