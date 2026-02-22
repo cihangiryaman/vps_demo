@@ -38,7 +38,7 @@
             top: -100%;
             font-family: 'Courier New', monospace;
             font-size: 18px;
-            color: #8338EC;
+            color: #d3b4fa;
             opacity: 0.15;
             animation: fall linear infinite;
             text-shadow: 0 0 5px #8338EC;
@@ -64,6 +64,33 @@
             border-bottom: 2px solid rgba(131, 56, 236, 0.3);
             padding-bottom: 3rem;
             animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .profile-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #8338EC;
+            box-shadow: 0 0 30px rgba(131, 56, 236, 0.4);
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .profile-photo:hover {
+            border-color: #FF006E;
+            box-shadow: 0 0 40px rgba(255, 0, 110, 0.5);
+            transform: scale(1.05);
+        }
+
+        .hero-text {
+            flex: 1;
         }
 
         .hero h1 {
@@ -208,6 +235,27 @@
             font-weight: 400;
         }
 
+        .experience-item .description {
+            margin-top: 1rem;
+            padding-left: 1.2rem;
+            list-style: none;
+        }
+
+        .experience-item .description li {
+            font-size: 1rem;
+            color: rgba(229, 229, 229, 0.75);
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .experience-item .description li::before {
+            content: '▸';
+            position: absolute;
+            left: -1.2rem;
+            color: #8338EC;
+        }
+
         /* Project Items */
         .project-item {
             margin-bottom: 3rem;
@@ -348,6 +396,20 @@
                 margin-bottom: 4rem;
             }
 
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-photo {
+                width: 150px;
+                height: 150px;
+            }
+
+            .contact-info {
+                justify-content: center;
+            }
+
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -395,35 +457,58 @@
 <main>
     <!-- Hero Section -->
     <header class="hero">
-        <h1>Cihangir YAMAN</h1>
+        <div class="hero-content">
+            <img src="Vesikalık-5.png" alt="Cihangir Yaman" class="profile-photo">
+            <div class="hero-text">
+                <h1>Cihangir YAMAN</h1>
         <p class="title">Student — Backend Developer</p>
         <p class="bio">
-            Dedicated software developer since 2018. In addition to .NET as my primary focus, I also develop projects regularly using Python and Java. I actively use Git, GitHub, and GitHub Copilot. Currently studying Computer Engineering at Marmara University.
-        </p>
+            Computer Engineering student and dedicated backend developer
+            since 2018. Specializing in the .NET ecosystem and Python,
+            Experienced in building scalable Multi-Tenant architectures and
+            implementing Clean Architecture principles. Actively uses Git, GitHub,
+            and GitHub Copilot and experienced in delivering technical talks on
+            software architecture.        </p>
         <div class="contact-info">
             <a href="mailto:cihangiryaman3200@gmail.com">cihangiryaman3200@gmail.com</a>
             <span class="separator">•</span>
             <a href="tel:+905435836673">+90 543 583 66 73</a>
+            </div>
+        </div>
         </div>
     </header>
 
     <!-- Work Experience -->
     <section>
-        <h2 class="section-title">Work Experience<h2>
+        <h2 class="section-title">Work Experience</h2>
         <div class="experience-item">
             <h3>NöroNest</h3>
-            <p class="role">Backend Team Lead (Volunteer)</p>
+            <p class="role">Backend Developer (Volunteer)</p>
             <p class="period">August 2025 — Present</p>
+            <ul class="description">
+                <li>Develop ASP.NET APIs and worker services for a therapeutic game designed for Alzheimer's patients.</li>
+                <li>Implement Azure Services, Docker and GitHub Actions pipeline.</li>
+                <li>Design and manage MSSQL and PostgreSQL databases for mobile application, game, and website.</li>
+            </ul>
+        </div>
+        <div class="experience-item">
+            <h3>MADES (Marmara Developer Society)</h3>
+            <p class="role">Founding Vice-President</p>
+            <p class="period">October 2025 — Present</p>
+            <ul class="description">
+                <li>Founded a student club to organize conferences, trainings, and competitions in software, application development, and game development.</li>
+                <li>Mentoring 24 students from various majors.</li>
+            </ul>
         </div>
         <div class="experience-item">
             <h3>apartmanyonetimsistemi.com</h3>
             <p class="role">Developer</p>
             <p class="period">July 2025 — December 2025</p>
-        </div>
-        <div class="experience-item">
-            <h3>MADES (Marmara Developer Society)</h3>
-            <p class="role">Founder</p>
-            <p class="period">October 2025 — Present</p>
+            <ul class="description">
+                <li>Built a multi-tenant SaaS architecture with clean architecture principles using ASP.NET and MSSQL.</li>
+                <li>Implemented design patterns such as Repository, Singleton, and Unit of Work.</li>
+                <li>Played an active role in every stage of the development process and in maintaining the system.</li>
+            </ul>
         </div>
     </section>
 
@@ -431,12 +516,12 @@
     <section>
         <h2 class="section-title">Featured Projects</h2>
         <div class="project-item">
-            <h3>Private Lesson Tracking System</h3>
+            <div class="contact-info"><h3><a href="https://github.com/cihangiryaman/TutoringManagementSystem">Tutoring Management System</a></h3></div>
             <p class="tech">ASP.NET • MSSQL • Entity Framework</p>
             <p>A multi-tenant SaaS application built with clean architecture, enabling private tutors to track their students, lessons, and payments.</p>
         </div>
         <div class="project-item">
-            <h3>3D Gear CAD Generator</h3>
+            <div class="contact-info"><h3><a href="https://github.com/cihangiryaman/3d_cad_gear_generator">3D CAD Gear Generator</a></h3></div>
             <p class="tech">Python • FastAPI • Three.js • Redis</p>
             <p>An application that allows mechanical engineers to generate 3D gears by entering parameters and export them in .step or .stl formats.</p>
         </div>
@@ -497,45 +582,48 @@
 
 <script>
     function createMatrixRain() {
-        const matrixBg = document.getElementById('matrixBg');
-        const columns = Math.floor(window.innerWidth / 30);
+    const matrixBg = document.getElementById('matrixBg');
+    const columns = Math.floor(window.innerWidth / 30);
 
-        for (let i = 0; i < columns; i++) {
-            const column = document.createElement('div');
-            column.className = 'matrix-column';
-            column.style.left = `${i * 30}px`;
+    for (let i = 0; i < columns; i++) {
+        const column = document.createElement('div');
+        column.className = 'matrix-column';
+        column.style.left = `${i * 30}px`;
 
-            // Random duration between 10-25 seconds
-            const duration = Math.random() * 15 + 10;
-            column.style.animationDuration = `${duration}s`;
+        // Random duration between 10-25 seconds
+        const duration = Math.random() * 15 + 10;
+        column.style.animationDuration = `${duration}s`;
 
-            // Create a string of random 1s and 0s
-            let binaryString = '';
-            const length = Math.floor(Math.random() * 15) + 10;
-            for (let j = 0; j < length; j++) {
-                binaryString += Math.random() > 0.5 ? '1' : '0';
-                if (j < length - 1) binaryString += '<br>';
-            }
-            column.innerHTML = binaryString;
+        // Random delay to stagger the start
+        const delay = Math.random() * 5;
+        column.style.animationDelay = `${delay}s`;
 
-            matrixBg.appendChild(column);
+        // Create a string of random 1s and 0s
+        let binaryString = '';
+        const length = Math.floor(Math.random() * 15) + 10;
+        for (let j = 0; j < length; j++) {
+            binaryString += Math.random() > 0.5 ? '1' : '0';
+            if (j < length - 1) binaryString += '<br>';
         }
+        column.innerHTML = binaryString;
+
+        matrixBg.appendChild(column);
     }
+}
 
-    // Initialize matrix rain
-    createMatrixRain();
+// Initialize matrix rain
+createMatrixRain();
 
-    // Recreate on window resize
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            const matrixBg = document.getElementById('matrixBg');
-            matrixBg.innerHTML = '';
-            createMatrixRain();
-        }, 250);
-    });
+// Recreate on window resize
+let resizeTimeout;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        const matrixBg = document.getElementById('matrixBg');
+        matrixBg.innerHTML = '';
+        createMatrixRain();
+    }, 250);
+});
 </script>
-
 </body>
 </html>
